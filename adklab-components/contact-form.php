@@ -16,7 +16,7 @@ add_shortcode('adklab_contact_form', 'adklab_contact_form_render');
 
 function adklab_contact_form_render(array $atts): string {
     $atts = shortcode_atts([
-        'email'        => get_option('admin_email'),
+        'email'        => 'adk-lab@yandex.ru',
         'subject'      => 'Новая заявка с сайта ' . get_bloginfo('name'),
         'extra_field'  => 'none',
         'success_text' => 'Ваше сообщение отправлено. Мы ответим в ближайшее время!',
