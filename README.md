@@ -90,6 +90,44 @@ define('ADKLAB_MOY_BIZNES_LOGO', 'https://site.ru/path/to/logo.png');
 define('ADKLAB_MOY_BIZNES_LINK', 'https://мойбизнес.рф');
 ```
 
+### 4. WooCommerce: русификация + SEO
+Подключается автоматически. Настраивается через `define` в `wp-config.php`:
+
+```php
+define('ADKLAB_ORG_NAME',    'ООО «Название»');
+define('ADKLAB_ORG_ADDRESS', 'ул. Примерная, д. 1');
+define('ADKLAB_ORG_CITY',    'Улан-Удэ');
+define('ADKLAB_ORG_REGION',  'Республика Бурятия');
+define('ADKLAB_ORG_POSTAL',  '670000');
+define('ADKLAB_ORG_PHONE',   '+7-900-000-00-00, +7-900-000-00-01'); // через запятую если несколько
+define('ADKLAB_ORG_EMAIL',   'info@company.ru');
+define('ADKLAB_ORG_BRAND',   'BrandA, BrandB'); // через запятую если несколько
+define('ADKLAB_SITE_DESC',   'Описание для главной страницы и OG-тегов.');
+define('ADKLAB_OG_IMAGE',    'https://site.ru/path/to/og-image.jpg');
+define('ADKLAB_DISABLE_COUPONS', '1'); // '0' чтобы оставить купоны
+```
+
+**Что включено:**
+- Полная русификация WooCommerce (корзина, чекаут, товары, уведомления)
+- Правильное склонение «1 товар / 2 товара / 5 товаров»
+- Отключение купонов, очистка нотисов корзины
+- Убран английский текст политики на чекауте
+- SEO: title-теги для `/cart`, `/checkout`, `/shop`
+- Meta description, canonical, Open Graph, Twitter Card
+- JSON-LD: Organization, WebSite, Product, BreadcrumbList
+- robots.txt: закрыты корзина, чекаут, поиск; добавлен sitemap
+- Sitemap: убраны пользователи
+
+**Дополнение title-тегов для конкретных страниц проекта** — добавить в `functions.php` темы с приоритетом < 5:
+```php
+add_filter('pre_get_document_title', function($t) {
+    $s = get_bloginfo('name');
+    if (is_front_page()) return $s . ' — Ваш слоган';
+    if (is_page('about')) return 'О нас — ' . $s;
+    return $t;
+}, 4);
+```
+
 ## Установка
 
 ### Как mu-plugin (рекомендуется)
