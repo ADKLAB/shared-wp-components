@@ -8,6 +8,8 @@
  *   subject      — тема письма
  *   extra_field  — дополнительное поле: "company" | "none" (по умолчанию none)
  *   success_text — текст после успешной отправки
+ *   privacy_url  — ссылка на политику конфиденциальности (по умолчанию /privacy)
+ *   btn_text     — текст кнопки отправки
  */
 
 defined('ABSPATH') || exit;
@@ -20,6 +22,8 @@ function adklab_contact_form_render(array $atts): string {
         'subject'      => 'Новая заявка с сайта ' . get_bloginfo('name'),
         'extra_field'  => 'none',
         'success_text' => 'Ваше сообщение отправлено. Мы ответим в ближайшее время!',
+        'privacy_url'  => home_url('/privacy'),
+        'btn_text'     => 'Отправить заявку',
     ], $atts, 'adklab_contact_form');
 
     $sent  = false;
@@ -87,12 +91,12 @@ function adklab_contact_form_render(array $atts): string {
                            <?php echo !empty($_POST['adklab_consent']) ? 'checked' : ''; ?> required>
                     <label for="adklab_consent">
                         Я даю согласие на обработку персональных данных в соответствии с
-                        <a href="<?php echo esc_url(home_url('/privacy')); ?>">политикой конфиденциальности</a>
+                        <a href="<?php echo esc_url($atts['privacy_url']); ?>">политикой конфиденциальности</a>
                         (ФЗ-152)
                     </label>
                 </div>
 
-                <button type="submit" class="adklab-form-submit">Отправить заявку</button>
+                <button type="submit" class="adklab-form-submit"><?php echo esc_html($atts['btn_text']); ?></button>
             </form>
 
         <?php endif; ?>
