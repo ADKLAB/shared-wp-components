@@ -50,12 +50,44 @@ bash setup/create-privacy-page.sh
 Создаёт страницу со слагом `/privacy` (или обновляет существующую).
 
 ### 3. Бейдж «Мой бизнес»
-Автоматически добавляется в `wp_footer`. Картинка берётся из `/assets/images/moy-biznes.png` активной темы.
+Встраивается в нижнюю строку футера (`footer-bottom`) рядом с копирайтом. Картинка берётся из `/assets/images/moy-biznes.png` активной темы.
+
+**1. Скопируйте `moy-biznes.png` в `/assets/images/` темы.**
+
+**2. Вызовите функцию в `footer.php` внутри блока `footer-bottom`:**
+```php
+<?php adklab_moy_biznes_badge(); ?>
+```
+
+**3. Добавьте CSS в `main.css` темы:**
+```css
+.footer-support {
+    font-size: .7rem;
+    color: rgba(255,255,255,.25);
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+}
+.footer-support__badge {
+    display: inline-flex;
+    align-items: center;
+    line-height: 0;
+    opacity: .85;
+    transition: opacity .25s;
+}
+.footer-support__badge:hover { opacity: 1; }
+.footer-support .footer-support__logo {
+    height: 52px;
+    width: auto;
+    display: block;
+    max-width: none; /* сброс WooCommerce max-width: 100% */
+}
+```
 
 Для кастомизации добавьте в `wp-config.php`:
 ```php
 define('ADKLAB_MOY_BIZNES_LOGO', 'https://site.ru/path/to/logo.png');
-define('ADKLAB_MOY_BIZNES_LINK', 'https://mybusiness.buryatia.ru');
+define('ADKLAB_MOY_BIZNES_LINK', 'https://мойбизнес.рф');
 ```
 
 ## Установка
