@@ -128,6 +128,67 @@ add_filter('pre_get_document_title', function($t) {
 }, 4);
 ```
 
+### 5. WooCommerce: каталог с фильтрами по категориям
+
+Файл темы `woocommerce.php` — перехватывает все WooCommerce-страницы и рендерит:
+- **Каталог (`/shop/`) и страницы категорий** — кастомная разметка с сайдбар-фильтрами и карточками товаров
+- **Страница товара** — стандартный `woocommerce_content()`
+
+> **Важно:** WooCommerce приоритизирует `woocommerce.php` перед `archive-product.php`. Вся логика каталога должна быть именно здесь.
+
+**1. Скопируйте `theme-templates/woocommerce.php` в корень темы.**
+
+**2. Отредактируйте массив категорий под проект:**
+```php
+$categories = [
+    'slug-kategorii-1' => 'Название категории 1',
+    'slug-kategorii-2' => 'Название категории 2',
+];
+```
+Слаги должны совпадать с реальными слагами категорий товаров в WooCommerce (только латиница).
+
+**3. CSS для каталога** — добавьте в `main.css` темы:
+```css
+.catalog-layout { display: grid; grid-template-columns: 220px 1fr; gap: 40px; padding: 40px 0 80px; }
+.catalog-filters h3 { font-size: 1rem; font-weight: 600; margin-bottom: 16px; }
+.filter-list { list-style: none; padding: 0; margin: 0; }
+.filter-list li + li { margin-top: 4px; }
+.filter-list a { display: block; padding: 8px 12px; border-radius: 6px; color: var(--text); text-decoration: none; transition: background .2s; }
+.filter-list a:hover { background: var(--light-bg); }
+.filter-list a.active { background: var(--blue-primary); color: var(--white); }
+.catalog-products .products.columns-3 { display: grid; grid-template-columns: repeat(3,1fr); gap: 24px; list-style: none; padding: 0; margin: 0; }
+.product-card { background: var(--white); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; }
+.product-card__img-wrap { display: block; aspect-ratio: 4/3; overflow: hidden; background: #f5f5f5; }
+.product-card__img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.product-card__img--placeholder { width: 100%; height: 100%; background: #eee; }
+.product-card__body { padding: 16px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+.product-card__title { font-size: 1rem; font-weight: 600; margin: 0; }
+.product-card__title a { color: var(--text); text-decoration: none; }
+.product-card__price { font-size: 1.1rem; font-weight: 700; color: var(--blue-primary); margin: 0; }
+.btn-catalog { display: inline-block; margin-top: auto; padding: 8px 16px; background: var(--blue-primary); color: var(--white); border-radius: var(--radius); text-decoration: none; font-size: .9rem; text-align: center; transition: opacity .2s; }
+.btn-catalog:hover { opacity: .85; }
+.catalog-pagination { margin-top: 40px; display: flex; gap: 8px; flex-wrap: wrap; }
+.catalog-pagination .page-numbers { padding: 8px 14px; border: 1px solid var(--border); border-radius: var(--radius); font-size: 0.9rem; color: var(--text); transition: background 0.2s, color 0.2s; }
+.catalog-pagination .page-numbers:hover, .catalog-pagination .page-numbers.current { background: var(--blue-primary); color: var(--white); border-color: var(--blue-primary); }
+.no-products { color: var(--gray); padding: 40px 0; }
+@media (max-width: 960px) {
+    .catalog-layout { grid-template-columns: 1fr; }
+    .catalog-filters { display: flex; gap: 24px; flex-wrap: wrap; align-items: flex-start; }
+    .catalog-filters h3 { width: 100%; }
+    .filter-list { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 0; }
+    .filter-list li + li { margin-top: 0; }
+    .catalog-products .products.columns-3 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px) {
+    .catalog-layout { padding: 24px 0 48px; }
+    .catalog-products .products.columns-3 { grid-template-columns: 1fr; }
+}
+```
+
+**4. Убедитесь, что в теме есть класс `.page-header`** для шапки каталога (стилизуется как баннер страницы).
+
+---
+
 ## Установка
 
 ### Как mu-plugin (рекомендуется)
