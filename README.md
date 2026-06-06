@@ -50,16 +50,14 @@ bash setup/create-privacy-page.sh
 Создаёт страницу со слагом `/privacy` (или обновляет существующую).
 
 ### 3. Бейдж «Мой бизнес»
-Встраивается в нижнюю строку футера (`footer-bottom`) рядом с копирайтом. Картинка берётся из `/assets/images/moy-biznes.png` активной темы.
+Встраивается в нижнюю строку футера (`footer-bottom`) рядом с копирайтом. Логотип **поставляется вместе с компонентом** (`adklab-components/assets/moy-biznes.png`) — копировать в тему не нужно.
 
-**1. Скопируйте `moy-biznes.png` в `/assets/images/` темы.**
-
-**2. Вызовите функцию в `footer.php` внутри блока `footer-bottom`:**
+**1. Вызовите функцию в `footer.php` внутри блока `footer-bottom`:**
 ```php
 <?php adklab_moy_biznes_badge(); ?>
 ```
 
-**3. Добавьте CSS в `main.css` темы:**
+**2. Добавьте CSS в `main.css` темы:**
 ```css
 .footer-support {
     font-size: .7rem;
@@ -84,9 +82,9 @@ bash setup/create-privacy-page.sh
 }
 ```
 
-Для кастомизации добавьте в `wp-config.php`:
+Для замены логотипа или ссылки добавьте в `wp-config.php` (опционально):
 ```php
-define('ADKLAB_MOY_BIZNES_LOGO', 'https://site.ru/path/to/logo.png');
+define('ADKLAB_MOY_BIZNES_LOGO', 'https://site.ru/path/to/logo.png'); // свой логотип вместо встроенного
 define('ADKLAB_MOY_BIZNES_LINK', 'https://мойбизнес.рф');
 ```
 

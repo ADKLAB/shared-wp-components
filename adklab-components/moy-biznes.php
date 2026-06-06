@@ -7,8 +7,11 @@
  * Использование в footer.php:
  *   <?php adklab_moy_biznes_badge(); ?>
  *
- * Настройка через define в wp-config.php:
- *   define('ADKLAB_MOY_BIZNES_LOGO', 'https://site.ru/path/to/logo.png');
+ * Логотип «Мой бизнес» поставляется вместе с компонентом
+ * (assets/moy-biznes.png) — копировать в тему не нужно.
+ *
+ * Настройка через define в wp-config.php (опционально):
+ *   define('ADKLAB_MOY_BIZNES_LOGO', 'https://site.ru/path/to/logo.png'); // свой логотип
  *   define('ADKLAB_MOY_BIZNES_LINK', 'https://мойбизнес.рф');
  */
 
@@ -17,7 +20,7 @@ defined('ABSPATH') || exit;
 function adklab_moy_biznes_badge(): void {
     $logo = defined('ADKLAB_MOY_BIZNES_LOGO')
         ? ADKLAB_MOY_BIZNES_LOGO
-        : get_template_directory_uri() . '/assets/images/moy-biznes.png';
+        : plugin_dir_url(__FILE__) . 'assets/moy-biznes.png';
 
     $link = defined('ADKLAB_MOY_BIZNES_LINK')
         ? ADKLAB_MOY_BIZNES_LINK
