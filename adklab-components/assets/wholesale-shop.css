@@ -1,0 +1,163 @@
+/* ============================================================================
+   ADKLAB — Оптовый интернет-магазин
+   Использует CSS-переменные темы: --blue-primary, --blue-dark, --gray, --dark,
+   --border, --white. Если их нет — заданы fallback-значения ниже.
+   ============================================================================ */
+:root {
+    --adklab-blue:      var(--blue-primary, #1565c0);
+    --adklab-blue-dark: var(--blue-dark, #0d3b6e);
+    --adklab-gray:      var(--gray, #6c757d);
+    --adklab-dark:      var(--dark, #1a1a2e);
+    --adklab-border:    #dde3ec;
+    /* Перекрываем фиолетовый WooCommerce по умолчанию */
+    --woocommerce:      var(--blue-primary, #1565c0);
+    --wc-primary:       var(--blue-primary, #1565c0);
+}
+
+/* ── Бейдж бренда на карточках убран (бренд есть на изображении) ──────────── */
+.product-card__brand { display: none !important; }
+
+/* ── Шапка страницы товара ────────────────────────────────────────────────── */
+.sp-header { margin-bottom: 28px; }
+.sp-header .product_title {
+    font-size: 2rem; font-weight: 800;
+    color: var(--adklab-blue-dark); margin: 0 0 14px; line-height: 1.2;
+}
+.sp-brand { color: var(--adklab-blue); }
+.sp-meta-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+.sp-category-tag {
+    display: inline-flex; align-items: center; padding: 6px 14px;
+    background: #f0f2f7; color: var(--adklab-dark); border-radius: 6px;
+    font-size: 0.8rem; font-weight: 600; text-decoration: none; transition: background 0.15s;
+}
+.sp-category-tag:hover { background: #e2e6f0; }
+
+.wholesale-price-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: #f0f7ff; color: var(--adklab-blue); border: 1.5px solid #c7dff5;
+    border-radius: 8px; font-size: 0.82rem; font-weight: 700;
+    letter-spacing: 0.04em; text-transform: uppercase; padding: 8px 16px;
+}
+.wholesale-price-badge::before {
+    content: ''; width: 8px; height: 8px; background: var(--adklab-blue);
+    border-radius: 50%; flex-shrink: 0;
+}
+
+/* ── Селектор типоразмера ─────────────────────────────────────────────────── */
+.wc-size-selector { margin-bottom: 16px; display: flex; flex-direction: column; gap: 12px; }
+.wc-size-selector select { display: none !important; position: absolute; visibility: hidden; }
+.wc-size-param { display: flex; flex-direction: column; gap: 6px; }
+.wc-size-param__label {
+    font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.07em; color: var(--adklab-gray);
+}
+.wc-size-chips { display: flex; flex-wrap: wrap; gap: 6px; padding-bottom: 2px; }
+.wc-size-chip {
+    flex-shrink: 0; padding: 5px 14px; border: 1.5px solid var(--adklab-border);
+    border-radius: 6px; font-size: 0.85rem; font-weight: 600; color: var(--adklab-dark);
+    background: #fff; cursor: pointer; white-space: nowrap; line-height: 1.5;
+    transition: border-color 0.12s, background 0.12s, color 0.12s;
+}
+.wc-size-chip:hover { border-color: var(--adklab-blue); color: var(--adklab-blue); background: #f0f7ff; }
+.wc-size-chip.active { border-color: var(--adklab-blue); background: var(--adklab-blue); color: #fff; }
+
+/* ── Количество + кнопка «В корзину» ──────────────────────────────────────── */
+.wc-qty-label {
+    font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.07em; color: var(--adklab-gray); margin: 16px 0 8px;
+}
+.woocommerce div.product form.cart { display: flex; flex-direction: column; gap: 0; }
+.cart-bottom-row { display: flex; align-items: center; gap: 10px; }
+.cart-bottom-row .quantity { flex-shrink: 0; margin: 0 !important; }
+.cart-bottom-row .quantity input.qty {
+    height: 48px; width: 80px; border: 1.5px solid var(--adklab-border);
+    border-radius: 8px; font-size: 1rem; font-weight: 600; text-align: center;
+    color: var(--adklab-dark); padding: 0 8px; -moz-appearance: textfield; display: block;
+}
+.cart-bottom-row .quantity input.qty::-webkit-inner-spin-button,
+.cart-bottom-row .quantity input.qty::-webkit-outer-spin-button { -webkit-appearance: none; }
+.cart-bottom-row .quantity input.qty:focus { outline: none; border-color: var(--adklab-blue); }
+
+.woocommerce div.product form.cart button.single_add_to_cart_button {
+    flex: 1; height: 48px; padding: 0 24px;
+    background: var(--adklab-blue) !important; color: #fff !important; border: none !important;
+    border-radius: 8px !important; font-size: 1rem !important; font-weight: 700 !important;
+    text-transform: none !important; cursor: pointer !important; transition: background 0.2s !important;
+}
+.woocommerce div.product form.cart button.single_add_to_cart_button:hover { background: var(--adklab-blue-dark) !important; }
+.woocommerce a.button, .woocommerce button.button:not(.single_add_to_cart_button), .woocommerce input.button {
+    background: var(--adklab-blue) !important; color: #fff !important; border: none !important;
+    border-radius: 8px !important; font-weight: 700 !important; text-transform: none !important;
+}
+
+/* ── Кнопка компонента (каталог/расчёт) ───────────────────────────────────── */
+.adklab-shop-btn {
+    display: inline-block; padding: 14px 28px; background: var(--adklab-blue);
+    color: #fff; border: none; border-radius: 8px; font-size: 1rem; font-weight: 700;
+    cursor: pointer; text-decoration: none; transition: background 0.2s;
+}
+.adklab-shop-btn:hover { background: var(--adklab-blue-dark); color: #fff; }
+
+/* ── Корзина: кнопка «Запросить расчёт» справа ────────────────────────────── */
+.adklab-request-wrap { text-align: right; margin-top: 20px; }
+
+/* Скрываем стандартные цены/итоги/кнопку обновления на странице корзины */
+.woocommerce-cart .actions,
+.woocommerce-cart .return-to-shop,
+.woocommerce-cart table.cart th.product-price,
+.woocommerce-cart table.cart td.product-price,
+.woocommerce-cart table.cart th.product-subtotal,
+.woocommerce-cart table.cart td.product-subtotal,
+.woocommerce-cart .cart-collaterals,
+.woocommerce-cart .cart_totals { display: none !important; }
+
+/* Поле количества в таблице корзины */
+.woocommerce-cart td.product-quantity input.qty {
+    width: 110px !important; height: 40px !important; font-size: 1rem !important;
+    padding: 0 10px !important; text-align: center !important;
+    border: 1.5px solid var(--adklab-border) !important; border-radius: 8px !important;
+    -moz-appearance: textfield !important;
+}
+
+/* ── Пустая корзина ───────────────────────────────────────────────────────── */
+.adklab-empty-cart { text-align: center; padding: 60px 20px; max-width: 520px; margin: 0 auto; }
+.adklab-empty-cart h2 { font-size: 1.6rem; font-weight: 800; color: var(--adklab-blue-dark); margin-bottom: 12px; }
+.adklab-empty-cart p { color: var(--adklab-gray); font-size: 1rem; line-height: 1.6; margin-bottom: 28px; }
+
+/* ── Попап-форма ──────────────────────────────────────────────────────────── */
+.adklab-modal {
+    position: fixed; inset: 0; z-index: 99999; align-items: center;
+    justify-content: center; padding: 20px; box-sizing: border-box;
+}
+.adklab-modal[style*="flex"] { display: flex; }
+.adklab-modal__overlay { position: absolute; inset: 0; background: rgba(13,59,110,0.6); backdrop-filter: blur(4px); }
+.adklab-modal__box {
+    position: relative; z-index: 1; background: #fff; border-radius: 16px; padding: 40px;
+    width: 100%; max-width: 560px; max-height: 90vh; overflow-y: auto;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.25);
+}
+.adklab-modal__close {
+    position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; border-radius: 50%;
+    border: none; background: #f0f2f7; font-size: 1rem; cursor: pointer; color: #333;
+    display: flex; align-items: center; justify-content: center;
+}
+.adklab-modal__title { font-size: 1.6rem; font-weight: 800; color: var(--adklab-blue-dark); margin: 0 0 8px; }
+.adklab-modal__sub { color: var(--adklab-gray); font-size: 0.95rem; margin: 0 0 28px; line-height: 1.5; }
+.adklab-consent-label { font-weight: 400 !important; font-size: 0.85rem; color: var(--adklab-gray); text-transform: none; letter-spacing: 0; }
+
+/* Блокировка кнопки отправки при незаполненной форме */
+.adklab-form-submit:disabled { opacity: 0.45 !important; cursor: not-allowed !important; }
+
+/* ── Мобильная адаптация ──────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+    .sp-header .product_title { font-size: 1.5rem; }
+}
+@media (max-width: 560px) {
+    .sp-header .product_title { font-size: 1.3rem; }
+    .cart-bottom-row { flex-wrap: wrap; gap: 12px; }
+    .cart-bottom-row .quantity, .cart-bottom-row .quantity input.qty { width: 100% !important; }
+    .woocommerce div.product form.cart button.single_add_to_cart_button { width: 100%; flex: 1 1 100%; }
+    .adklab-request-wrap { text-align: center; }
+    .adklab-shop-btn { width: 100%; }
+    .adklab-modal__box { padding: 24px 20px; }
+}

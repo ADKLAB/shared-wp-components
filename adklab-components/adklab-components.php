@@ -1,8 +1,8 @@
 <?php
 /**
  * Plugin Name: ADKLAB Shared Components
- * Description: Переиспользуемые компоненты для проектов ADKLAB: форма обратной связи, политика конфиденциальности, бейдж «Мой бизнес», WooCommerce SEO.
- * Version: 1.2.0
+ * Description: Переиспользуемые компоненты для проектов ADKLAB: форма обратной связи, политика конфиденциальности, бейдж «Мой бизнес», WooCommerce SEO, оптовый интернет-магазин.
+ * Version: 1.3.0
  * Author: ADKLAB
  * License: GPL2
  */
@@ -13,3 +13,4 @@ require_once __DIR__ . '/contact-form.php';
 require_once __DIR__ . '/moy-biznes.php';
 require_once __DIR__ . '/privacy-policy.php';
 require_once __DIR__ . '/woocommerce-setup.php';
+require_once __DIR__ . '/wholesale-shop.php';
